@@ -30,7 +30,6 @@
         </environment>
     </environments>
 
-
     <mappers>
         <!-- 告知映射文件方式1，一个一个的配置-->
         <mapper resource="com/yqc/mapper/UserMapper.xml"/>

@@ -1,6 +1,7 @@
 package com.yqc.mapper;
 
 import com.yqc.entity.UserBean;
+import org.apache.ibatis.annotations.Insert;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public interface UserMapper {
      * @return
      * @throws Exception
      */
+    @Insert("insert into user (NAME , ADDRESS, AGE) values (#{name},#{address},#{age})")
     int insertUser(UserBean user) throws Exception;
 
     /**

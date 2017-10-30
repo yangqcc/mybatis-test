@@ -8,9 +8,9 @@
         <result property="age" column="age" javaType="java.lang.Integer"></result>
     </resultMap>
 
-    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+<!--    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
         insert into user (NAME , ADDRESS, AGE) values (#{name},#{address},#{age})
-    </insert>
+    </insert>-->
 
     <update id="updateUser">
         update user set NAME =#{name}, ADDRESSS=#{address},age=#{age} where id=#{id}

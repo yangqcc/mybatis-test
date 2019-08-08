@@ -1,58 +1,41 @@
 package com.yqc.mapper;
 
 import com.yqc.entity.UserBean;
+import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 
-import java.util.List;
-
 /**
- * Created by yangqc on 2017/10/30
+ * @author yangqc
  */
 public interface UserMapper {
 
-    /**
-     * 新增用戶
-     *
-     * @param user
-     * @return
-     * @throws Exception
-     */
-    @Insert("insert into user (NAME , ADDRESS, AGE) values (#{name},#{address},#{age})")
-    int insertUser(UserBean user) throws Exception;
+  /**
+   * 新增用戶
+   */
+  @Insert("insert into user (NAME , ADDRESS, AGE , CLASS_ID) values (#{name},#{address},#{age},#{classBean.id})")
+  int insertUser(UserBean userBean) throws Exception;
 
-    /**
-     * 修改用戶
-     *
-     * @param user
-     * @param id
-     * @return
-     * @throws Exception
-     */
-    int updateUser(UserBean user, int id) throws Exception;
+  /**
+   * 修改用戶
+   * @param userBean
+   * @param id
+   * @return
+   * @throws Exception
+   */
+  int updateUser(UserBean userBean, int id) throws Exception;
 
-    /**
-     * 刪除用戶
-     *
-     * @param id
-     * @return
-     * @throws Exception
-     */
-    int deleteUser(int id) throws Exception;
+  /**
+   * 刪除用戶
+   */
+  int deleteUser(int id) throws Exception;
 
-    /**
-     * 根据id查询用户信息
-     *
-     * @param id
-     * @return
-     * @throws Exception
-     */
-    UserBean selectUserById(int id) throws Exception;
+  /**
+   * 根据id查询用户信息
+   */
+  UserBean selectUserById(int id) throws Exception;
 
-    /**
-     * 查询所有的用户信息
-     *
-     * @return
-     * @throws Exception
-     */
-    List<UserBean> selectAllUser() throws Exception;
+  /**
+   * 查询所有的用户信息
+   */
+  List<UserBean> selectAllUser() throws Exception;
 }

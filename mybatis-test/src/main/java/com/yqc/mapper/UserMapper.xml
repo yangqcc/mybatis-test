@@ -1,30 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yqc.mapper.UserMapper">
-    <resultMap id="userMap" type="UserBean">
-        <id property="id" column="id" javaType="java.lang.Integer"></id>
-        <result property="name" column="name" javaType="java.lang.String"></result>
-        <result property="address" column="address" javaType="java.lang.String"></result>
-        <result property="age" column="age" javaType="java.lang.Integer"></result>
-    </resultMap>
+  <!--设置映射关系-->
+  <resultMap id="userMap" type="com.yqc.entity.UserBean">
+    <id property="id" column="id" javaType="java.lang.Integer"></id>
+    <result property="name" column="name" javaType="java.lang.String"></result>
+    <result property="address" column="address" javaType="java.lang.String"></result>
+    <result property="age" column="age" javaType="java.lang.Integer"></result>
+    <!--一对一关系-->
+    <association property="classBean" javaType="com.yqc.entity.ClassBean">
+      <id column="id" property="id"/>
+      <result column="name" property="name"/>
+      <result column="description" property="description"/>
+    </association>
+  </resultMap>
 
-<!--    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
-        insert into user (NAME , ADDRESS, AGE) values (#{name},#{address},#{age})
-    </insert>-->
+  <!--    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+          insert into userBean (NAME , ADDRESS, AGE) values (#{name},#{address},#{age})
+      </insert>-->
 
-    <update id="updateUser">
-        update user set NAME =#{name}, ADDRESSS=#{address},age=#{age} where id=#{id}
+  <update id="updateUser">
+        update userBean set NAME =#{name}, ADDRESSS=#{address},age=#{age} where id=#{id}
     </update>
 
-    <delete id="deleteUser" parameterType="int">
-        delete from user where id=#{id}
+  <delete id="deleteUser" parameterType="int">
+        delete from userBean where id=#{id}
     </delete>
 
-    <select id="selectUserById" parameterType="int" resultMap="userMap">
-        select * from user where id=#{id}
+  <select id="selectUserById" parameterType="int" resultMap="userMap">
+        select u.*,c.id as classBean.id,c.name as classBean.name,c.description as classBean.description from user as u, class as c
+        where id=#{id} and class.id=user.classId
     </select>
 
-    <select id="selectAllUser" resultMap="userMap">
-        select * from user
+  <select id="selectAllUser" resultMap="userMap">
+        select * from userBean
     </select>
 </mapper>

@@ -10,9 +10,9 @@
     <result property="age" column="age" javaType="java.lang.Integer"></result>
     <!--一对一关系-->
     <association property="classBean" javaType="com.yqc.entity.ClassBean">
-      <id column="id" property="id"/>
-      <result column="name" property="name"/>
-      <result column="description" property="description"/>
+      <id column="s_id" property="id"/>
+      <result column="s_name" property="name"/>
+      <result column="s_description" property="description"/>
     </association>
   </resultMap>
 
@@ -29,11 +29,12 @@
     </delete>
 
   <select id="selectUserById" parameterType="int" resultMap="userMap">
-        select u.*,c.id as classBean.id,c.name as classBean.name,c.description as classBean.description from user as u, class as c
+        select u.*,c.* from user as u, class as c
         where id=#{id} and class.id=user.classId
     </select>
 
   <select id="selectAllUser" resultMap="userMap">
-        select * from userBean
+        select u.*, s.id as s_id ,s.name as s_name ,s.description as s_description
+        from user as u left join class s on s.id=u.class_id
     </select>
 </mapper>

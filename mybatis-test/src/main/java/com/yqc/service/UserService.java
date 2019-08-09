@@ -2,6 +2,7 @@ package com.yqc.service;
 
 import com.yqc.entity.ClassBean;
 import com.yqc.entity.UserBean;
+import com.yqc.mapper.ClassMapper;
 import com.yqc.mapper.UserMapper;
 import com.yqc.util.DbTools;
 import java.util.List;
@@ -15,10 +16,10 @@ import org.apache.ibatis.session.SqlSession;
 public class UserService {
 
   public static void main(String[] args) {
-    insertUser();
+    // insertUser();
     //deleteUser(1);
     //selectUserById(2);
-    //selectAllUser();
+    selectAllUser();
   }
 
   /**
@@ -26,11 +27,14 @@ public class UserService {
    */
   private static boolean insertUser() {
     SqlSession session = DbTools.getSession();
-    UserMapper mapper = session.getMapper(UserMapper.class);
-    UserBean user = new UserBean("nicholas", "berlin", 29, new ClassBean("一班", "这里是一年级一班!"));
+    UserMapper userMapper = session.getMapper(UserMapper.class);
+    ClassMapper classMapper = session.getMapper(ClassMapper.class);
+    ClassBean classBean = new ClassBean(1, "一班", "这里是一年级一班!");
+    UserBean user = new UserBean("nicholas", "berlin", 29, classBean);
     try {
-      int index = mapper.insertUser(user);
-      boolean bool = index > 0 ? true : false;
+      classMapper.insertClass(classBean);
+      int index = userMapper.insertUser(user);
+      boolean bool = index > 0;
       log.error("新增用户user对象:{},操作状态:{}", new Object[]{user, bool});
       session.commit();
       return bool;

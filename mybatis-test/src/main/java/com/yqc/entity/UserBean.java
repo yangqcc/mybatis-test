@@ -10,6 +10,9 @@ import lombok.Data;
 @Data
 public class UserBean {
 
+  public UserBean() {
+  }
+
   public UserBean(String name, String address, int age, ClassBean classBean) {
     this.name = name;
     this.address = address;

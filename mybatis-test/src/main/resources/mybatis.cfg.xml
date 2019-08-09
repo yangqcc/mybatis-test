@@ -15,10 +15,15 @@
     <package name="com.yqc.entity"/>
   </typeAliases>
 
+  <!--自定义类转换器，暂时不能指定特定的表和实体，但是可以针对某一个结果映射进行转换，也可以放到
+  全局里面，局部都是高于全局的优先级-->
   <typeHandlers>
     <typeHandler handler="com.yqc.handler.MyTypeHandler"
       javaType="Boolean" jdbcType="NUMERIC"/>
   </typeHandlers>
+
+  <!--自定义对象转换-->
+  <objectFactory type="com.yqc.util.MyObjectFactory"></objectFactory>
 
   <!-- 配置mybatis运行环境 -->
   <environments default="development">

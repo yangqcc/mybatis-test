@@ -21,7 +21,7 @@ public class TestMyBatis {
   public void insertUser() {
     SqlSession session = DbTools.getSession();
     UserMapper mapper = session.getMapper(UserMapper.class);
-    UserBean user = new UserBean("nicholas", "berlin", 29, new ClassBean("一班", "这里是一年级一班!"));
+    UserBean user = new UserBean("nicholas", "berlin", 29, new ClassBean(1, "一班", "这里是一年级一班!"));
     try {
       int index = mapper.insertUser(user);
       boolean bool = index > 0 ? true : false;

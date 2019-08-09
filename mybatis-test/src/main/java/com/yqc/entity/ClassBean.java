@@ -12,8 +12,12 @@ import lombok.Data;
 @Data
 public class ClassBean {
 
-  public ClassBean(String name, String description) {
+  public ClassBean() {
+  }
+
+  public ClassBean(int id, String name, String description) {
     this.name = name;
+    this.id = id;
     this.description = description;
   }
 
